@@ -155,15 +155,15 @@ export const TariffCard = ({
 
         {/* Период */}
         <h3 className={clsx(
-          "text-[18px] md:text-2xl font-medium text-white leading-[1.2] mb-3",
-          disabledDiscount ? "mt-6 md:mt-13" : "mt-6 md:mt-15"
+          "text-[18px] md:text-2xl font-medium text-white leading-[1.2] mb-3 mt-2 transform translate-x-[-20px] translate-y-[-20px]",
+          disabledDiscount ? "mt-6 md:mt-17" : "mt-6 md:mt-15"
         )}>
           {tariff.period}
         </h3>
 
         {/* Цены */}
-        <div className="flex flex-col items-end gap-1">
-          <span className="text-[25px] md:text-5xl font-bold text-white leading-none">
+        <div className="flex flex-col items-end gap-1 transform translate-y-[-20px]">
+          <span className="text-[34px] md:text-5xl font-bold text-white leading-none">
             {disabledDiscount ? tariff.full_price : tariff.price} ₽
           </span>
           {!disabledDiscount && (
