@@ -1,13 +1,17 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Tariff } from "@/types/tariff";
+import {
+  createAsyncThunk,
+  createSlice,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import { getTariffs } from "@/services/tariffs";
+import type { Tariff } from "@/types/tariff";
 
 export const fetchTariffs = createAsyncThunk(
   "tariffs/fetchTariffs",
   async () => {
     const data = await getTariffs();
     return data as Tariff[];
-  }
+  },
 );
 
 interface TariffsState {
@@ -42,13 +46,16 @@ export const tariffsSlice = createSlice({
         state.loading = true;
         state.error = undefined;
       })
-      .addCase(fetchTariffs.fulfilled, (state, action: PayloadAction<Tariff[]>) => {
-        state.loading = false;
-        state.all = action.payload;
+      .addCase(
+        fetchTariffs.fulfilled,
+        (state, action: PayloadAction<Tariff[]>) => {
+          state.loading = false;
+          state.all = action.payload;
 
-        state.best = action.payload.find(t => t.is_best);
-        state.others = action.payload.filter(t => !t.is_best);
-      })
+          state.best = action.payload.find((t) => t.is_best);
+          state.others = action.payload.filter((t) => !t.is_best);
+        },
+      )
       .addCase(fetchTariffs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

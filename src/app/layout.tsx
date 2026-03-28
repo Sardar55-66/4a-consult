@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist_Mono, Montserrat } from "next/font/google";
 import { Providers } from "./provider";
 
@@ -17,30 +16,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Тарифы — Мой Сайт',
-  description: 'Описание страницы с тарифами, актуальные цены и условия.',
-  keywords: 'тарифы, планы, подписка, цены',
-  authors: [{ name: 'Sardar', url: 'https://example.com' }],
+  title: "Тарифы — Мой Сайт",
+  description: "Описание страницы с тарифами, актуальные цены и условия.",
+  keywords: "тарифы, планы, подписка, цены",
+  authors: [{ name: "Sardar", url: "https://example.com" }],
   openGraph: {
-    title: 'Тарифы — Мой Сайт',
-    description: 'Описание страницы с тарифами, актуальные цены и условия.',
-    url: 'https://example.com/tariffs',
-    siteName: 'Мой Сайт',
+    title: "Тарифы — Мой Сайт",
+    description: "Описание страницы с тарифами, актуальные цены и условия.",
+    url: "https://example.com/tariffs",
+    siteName: "Мой Сайт",
     images: [
       {
-        url: '/musc.png',
+        url: "/musc.png",
         width: 800,
         height: 600,
       },
     ],
-    locale: 'ru_RU',
-    type: 'website',
+    locale: "ru_RU",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Тарифы — Мой Сайт',
-    description: 'Описание страницы с тарифами, актуальные цены и условия.',
-    images: ['/musc.png'],
+    card: "summary_large_image",
+    title: "Тарифы — Мой Сайт",
+    description: "Описание страницы с тарифами, актуальные цены и условия.",
+    images: ["/musc.png"],
   },
 };
 
@@ -51,10 +50,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${montserrat.variable} ${geistMono.variable} antialiased font-sans`}>
-        <Providers>
-          {children}
-        </Providers>
+      <body
+        className={`${montserrat.variable} ${geistMono.variable} antialiased font-sans`}
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

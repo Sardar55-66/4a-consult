@@ -1,8 +1,8 @@
 "use client";
 
-import { Tariff } from "@/types/tariff";
-import { calcDiscount } from "@/utils/discount";
 import clsx from "clsx";
+import type { Tariff } from "@/types/tariff";
+import { calcDiscount } from "@/utils/discount";
 
 interface Props {
   tariff: Tariff;
@@ -17,228 +17,169 @@ export const TariffCard = ({
   selected,
   disabledDiscount,
   onSelect,
-  variant
+  variant,
 }: Props) => {
   const discount = calcDiscount(tariff.price, tariff.full_price);
+  console.log('disabledDiscount', disabledDiscount)
 
   const discountTransition = "transition-all duration-500 ease-in-out";
 
   if (variant === "large") {
     return (
-      <div
+      <button
+        type="button"
         onClick={onSelect}
-        className="w-full min-h-[190px] relative bg-[#313637] rounded-[34px] pt-[30px] pb-[26px] pl-[19px] pr-[50px] flex flex-col items-end justify-center gap-4 cursor-pointer"
-      >
-        {/* Border */}
-        {selected && (
-          <div
-            className="absolute inset-[-2px] border-2 border-[#fdb056] rounded-[36px] pointer-events-none"
-            aria-hidden
-          />
+        aria-pressed={selected}
+        className={clsx(
+          "relative rounded-[20px] md:rounded-[34px] border cursor-pointer transition bg-[#313637] mb-3",
+          "flex flex-row w-full gap-6 p-6 text-left font-inherit",
+          selected ? "border-[#FDB056]" : "border-none",
         )}
-
-        {/* Discount */}
+      >
+        {/* Скидка: слева на десктопе, справа на мобилке */}
         {!disabledDiscount && (
           <div
             className={clsx(
-              "absolute top-0 md:left-4 left-75 bg-[#fd5656] rounded-bl-[8px] rounded-br-[8px] px-[5px] py-[5px] text-white text-[16px] md:text-[22px] font-['Gilroy',sans-serif] font-medium",
-              discountTransition
+              "absolute top-0 bg-[#FD5656] w-fit text-white text-[14px] px-2 py-[5px] rounded-bl-[8px] rounded-br-[8px] transition-all duration-500 ease-in-out",
+              discountTransition,
+              "right-18 md:left-12",
             )}
           >
             -{discount}%
           </div>
         )}
 
-        {/* HIT */}
+        {/* HIT: всегда справа сверху */}
         {tariff.is_best && (
-          <p className="relative md:top-[-10px] top-[-26px] left-[26px] md:right-0 text-[#fdb056] text-[13px] md:text-[22px] tracking-[0.66px] font-['Montserrat',sans-serif] font-medium leading-[1.3]">
+          <p className="absolute mr-6 mt-2 top-0 right-0 text-[#fdb056] text-[13px] md:text-[22px] tracking-[0.66px] font-['Montserrat',sans-serif] font-medium leading-[1.3]">
             хит!
           </p>
         )}
 
-        <div
-          className="flex flex-row md:flex-row items-center justify-center gap-6 md:gap-[40px] w-full"
-        >
-          {/* Левая часть: период + цены */}
-          <div
+        <div className={clsx(
+          "flex-1 flex flex-col items-center relative transform translate-y-[-14px]",
+          disabledDiscount ? "mt-6" : "mt-2"
+        )}>
+          {/* Период */}
+          <p
             className="
-      flex flex-col
-      items-center md:items-end
-      gap-3 md:gap-4
-      md:ml-5
-      w-full md:w-auto
+      text-white
+      text-[18px] md:text-[26px]
+      font-['Montserrat',sans-serif]
+      font-medium
+      leading-[1.2]
+      mt-2
+      mb-3
+      mr-[32px]
     "
           >
-            {/* Период */}
+            {tariff.period}
+          </p>
+
+          {/* Цены */}
+          <div className="flex flex-col items-start gap-1">
+            {/* Цена со скидкой */}
             <p
               className="
-        text-white
-        text-[18px] md:text-[26px]
+        text-[#fdb056]
+        text-[34px] md:text-5xl
         font-['Montserrat',sans-serif]
-        font-medium
-        leading-[1.2]
-        text-center md:text-right
+        font-semibold
+        leading-none
+        transition-all duration-500 ease-in-out
+        w-max
       "
             >
-              Навсегда
+              {disabledDiscount ? tariff.full_price : tariff.price} ₽
             </p>
 
-            {/* Цены */}
-            <div className="flex flex-col items-center md:items-end gap-1">
-              {/* Цена со скидкой */}
-              <p
-                className="
-          text-[#fdb056]
-          text-[30px] md:text-7xl
-          font-['Montserrat',sans-serif]
-          font-semibold
-          leading-none
-          transition-all duration-500 ease-in-out
-        "
-              >
-                5990 ₽
-              </p>
-
-              {/* Старая цена */}
+            {/* Старая цена */}
+            {!disabledDiscount && (
               <p
                 className="
           text-[#919191]
-          text-[14px] md:text-[24px]
+          text-[13px] md:text-[24px]
           font-['Montserrat',sans-serif]
           font-normal
           leading-[1.2]
           line-through
           decoration-1
           decoration-[#919191]
+          md:ml-17
+          transform translate-x-[70px]
         "
               >
-                18990 ₽
+                {tariff.full_price} ₽
               </p>
-            </div>
-          </div>
-
-          {/* Правая часть: описание */}
-          <div className="w-full md:w-auto px-2 md:px-0">
-            <p
-              className="
-        text-white
-        text-[14px] md:text-[16px]
-        font-['Montserrat',sans-serif]
-        font-normal
-        leading-[1.3]
-        text-center md:text-left
-        max-w-full md:max-w-[328px]
-      "
-            >
-              Для тех, кто хочет всегда быть в форме и поддерживать здоровье
-            </p>
+            )}
           </div>
         </div>
 
-      </div>
+        {/* Правая половина: текст */}
+        <div className="flex-1 flex items-center justify-end mt-[25px]">
+          <p
+            className="
+      text-white
+      text-[14px] md:text-[16px]
+      font-['Montserrat',sans-serif]
+      font-normal
+      leading-[1.3]
+      break-words
+    "
+          >
+            {tariff.text}
+          </p>
+        </div>
+      </button>
     );
   }
 
   /* SMALL VARIANT*/
   return (
-    <div
+    <button
+      type="button"
       onClick={onSelect}
+      aria-pressed={selected}
       className={clsx(
-        "relative rounded-4xl border cursor-pointer transition bg-[#2D3233]",
-        "p-8 flex mobile:flex-row md:flex-col  gap-4 w-full mobile:pl-[45px]",
-        selected ? "border-accent" : "border-gray-700"
+        "relative rounded-[20px] md:rounded-[40px] border cursor-pointer transition bg-[#2D3233] overflow-auto md:h-[335px]",
+        "flex flex-row md:flex-col w-full gap-4 p-4 text-left font-inherit",
+        selected ? "border-[#FDB056]" : "border-none",
       )}
     >
-      {/* Скидка */}
-      {!disabledDiscount && (
-        <div
-          className="
-          absolute top-0 md:left-4 left-80
-          bg-[#FD5656]
-          text-white
-          text-[14px]
-          px-2 py-[5px]
-          rounded-bl-[8px] rounded-br-[8px]
-          transition-all duration-500 ease-in-out
-          
-        "
-        >
-          -{discount}%
-        </div>
-      )}
+      <div className="flex-1 flex items-center flex-col">
+        {!disabledDiscount && (
+          <div className="absolute top-0 md:left-12 w-fit right-8 bg-[#FD5656] text-white text-[14px] px-2 py-[5px] rounded-bl-[8px] rounded-br-[8px] transition-all duration-500 ease-in-out">
+            -{discount}%
+          </div>
+        )}
 
-      {/* Левая часть: период + цены */}
-      <div
-        className="
-        flex flex-col
-        justify-center
-        items-start
-        gap-2
-        min-w-0
-        min-h-[110px]
-        mobile:pt-[30px] 
-        mobile:pb-[26px] 
-        mobile:pl-[19px] 
-        mobile:pr-[50px]
-      "
-      >
         {/* Период */}
-        <h3
-          className="
-          text-[18px] md:text-2xl
-          font-medium
-          text-white
-          leading-[1.2]
-          mt-[25px]
-        "
-        >
+        <h3 className={clsx(
+          "text-[18px] md:text-2xl font-medium text-white leading-[1.2] mb-3",
+          disabledDiscount ? "mt-6 md:mt-13" : "mt-6 md:mt-15"
+        )}>
           {tariff.period}
         </h3>
 
         {/* Цены */}
-        <div className="flex items-baseline gap-2 flex-wrap">
-          <span
-            className="
-            text-[30px] md:text-5xl
-            font-bold
-            text-white
-            leading-none
-            transition-all duration-500 ease-in-out
-          "
-          >
+        <div className="flex flex-col items-end gap-1">
+          <span className="text-[25px] md:text-5xl font-bold text-white leading-none">
             {disabledDiscount ? tariff.full_price : tariff.price} ₽
           </span>
-
           {!disabledDiscount && (
-            <span
-              className="
-              text-[14px]
-              text-gray-500
-              line-through
-              leading-none
-              transition-all duration-500 ease-in-out
-            "
-            >
+            <span className="text-[14px] md:text-[24px] text-gray-500 line-through leading-none">
               {tariff.full_price} ₽
             </span>
           )}
         </div>
       </div>
 
-      {/* Правая часть: текст */}
-      <div className="flex items-center min-w-0 flex-1">
-        <p
-          className="
-          text-[14px]
-          text-gray-400
-          leading-[1.3]
-          wrap-break-words
-        "
-        >
+      <div className="flex-1 flex flex-col items-end md:items-start relative justify-center">
+        {/* Бейджик в правом верхнем углу */}
+        <p className="text-[12px] md:text-[16px] text-white leading-[1.3] break-words mt-6">
           {tariff.text}
         </p>
       </div>
-    </div>
-
+    </button>
   );
 };

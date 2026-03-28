@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Тарифы - Фитнес Приложение
 
-## Getting Started
+Это веб-приложение для выбора и покупки тарифов на фитнес-услуги. Приложение позволяет пользователям просматривать доступные тарифы, выбирать подходящий план, применять скидки и оформлять заказ.
 
-First, run the development server:
+## Функционал
+
+- **Отображение тарифов**: Приложение показывает большой тариф "Навсегда" и несколько меньших тарифов на разные периоды.
+- **Выбор тарифа**: Пользователи могут кликать на карточки тарифов для выбора.
+- **Скидки**: Автоматическое применение скидок с отображением старой и новой цены.
+- **Адаптивный дизайн**: Оптимизировано для мобильных и десктопных устройств.
+- **Интерактивные элементы**: Анимации, hover-эффекты и переходы.
+
+## Технологии
+
+- **Next.js 16** - React фреймворк для серверного рендеринга
+- **TypeScript** - Типизированный JavaScript
+- **Tailwind CSS** - Утилитарный CSS фреймворк
+- **Redux Toolkit** - Управление состоянием
+- **Biome** - Линтер и форматтер кода
+- **Axios** - HTTP клиент для API запросов
+
+## Запуск проекта
+
+### Предварительные требования
+
+- Node.js 18+
+- npm или yarn
+
+### Установка зависимостей
+
+```bash
+npm install
+```
+
+### Запуск в режиме разработки
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Сборка для продакшена
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Линтинг
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Структура проекта
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                 # Next.js App Router
+│   ├── globals.css      # Глобальные стили
+│   ├── layout.tsx       # Корневой layout
+│   └── page.tsx         # Главная страница
+├── components/          # React компоненты
+│   ├── tariffs/         # Компоненты тарифов
+│   │   ├── TariffCard.tsx
+│   │   ├── TariffsSection.tsx
+│   │   └── ...
+│   └── ...
+├── hooks/               # Кастомные хуки
+├── services/            # API сервисы
+├── store/               # Redux store
+├── types/               # TypeScript типы
+└── utils/               # Утилиты
+```
 
-## Deploy on Vercel
+## Известные проблемы
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Проблема с дублирующимися ID тарифов**: Бэкенд API возвращает два тарифа с одинаковыми ID. Из-за этого при инициализации приложения по умолчанию могут выбираться два тарифа, хотя должен быть выбран только один. Поскольку в техническом задании не было указано требование исправить эту проблему, код оставлен без изменений.

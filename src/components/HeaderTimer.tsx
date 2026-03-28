@@ -1,11 +1,11 @@
 "use client";
 
+import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import { useTimer } from "@/hooks/useTimer";
-import clsx from "clsx";
 
 export const HeaderTimer = ({ onFinish }: { onFinish: () => void }) => {
-  const time = useTimer(260);
+  const time = useTimer(120);
   const hasFinished = useRef(false);
 
   useEffect(() => {
@@ -21,14 +21,12 @@ export const HeaderTimer = ({ onFinish }: { onFinish: () => void }) => {
   return (
     <div className="fixed top-0 w-full bg-[#1F5D45] text-white z-50">
       <div className="text-center py-2 md:py-3">
-        <p className="text-sm md:text-2xl">
-          Успейте открыть пробную неделю
-        </p>
+        <p className="text-sm md:text-2xl">Успейте открыть пробную неделю</p>
 
         <span
           className={clsx(
-            "block font-bold mt-1 text-xl md:text-2xl transition-all",
-            time <= 30 && time > 0 && "text-red-500 blink"
+            "block font-bold mt-1 text-xl md:text-2xl transition-all text-[#FFBB00]",
+            time <= 30 && time > 0 && "text-red-500 blink",
           )}
         >
           ✨ {min}:{sec} ✨
@@ -47,5 +45,3 @@ export const HeaderTimer = ({ onFinish }: { onFinish: () => void }) => {
     </div>
   );
 };
-
-

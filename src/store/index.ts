@@ -3,8 +3,8 @@ import tariffsReducer from "./tariffsSlice";
 
 export const store = configureStore({
   reducer: {
-    tariffs: tariffsReducer
-  }
+    tariffs: tariffsReducer,
+  },
 });
 
 // Типы для TypeScript

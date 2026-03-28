@@ -7,7 +7,7 @@ export const useTimer = (initial: number) => {
     if (time <= 0) return;
 
     const id = setInterval(() => {
-      setTime(t => t - 1);
+      setTime((t) => t - 1);
     }, 1000);
 
     return () => clearInterval(id);

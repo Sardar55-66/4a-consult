@@ -7,7 +7,7 @@ export default function Page() {
     <main className="flex flex-col bg-[#232829] min-h-screen text-white pt-20">
       <HeaderTimerWrapper />
 
-      <div className="w-full px-4 flex-1">
+      <div className="w-full px-2 flex-1">
         <div className="w-full max-w-[1200px] mx-auto">
           <TariffsSection />
         </div>
