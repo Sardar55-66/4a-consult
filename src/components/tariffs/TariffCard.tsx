@@ -162,7 +162,7 @@ export const TariffCard = ({
         </h3>
 
         {/* Цены */}
-        <div className="flex flex-col items-end gap-1 transform translate-y-[-20px]">
+        <div className="flex flex-col items-end gap-1 transform translate-y-[-20px] w-max">
           <span className="text-[34px] md:text-5xl font-bold text-white leading-none">
             {disabledDiscount ? tariff.full_price : tariff.price} ₽
           </span>
