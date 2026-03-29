@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { useTimer } from "@/hooks/useTimer";
 
 export const HeaderTimer = ({ onFinish }: { onFinish: () => void }) => {
-  const time = useTimer(120);
+  const time = useTimer(10);
   const hasFinished = useRef(false);
 
   useEffect(() => {

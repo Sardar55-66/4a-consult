@@ -63,7 +63,7 @@ export const TariffsAgreement = ({ checked, onChange, selectedId }: Props) => {
           )}
         </span>
 
-        <span className="md:text-[16px] text-[10px] leading-5 w-max mb-[25px] text-[#CDCDCD]">
+        <span className="md:text-[16px] text-[11px] leading-5 w-max mb-[25px] text-[#CDCDCD] md:max-w-[90%]">
           Я согласен с{" "}
           <span className="underline">
             офертой рекуррентных платежей и Политикой конфиденциальности

@@ -1,6 +1,6 @@
 export const TariffsNote = () => {
   return (
-    <div className="flex items-center rounded-[20px] bg-[#2D3233] p-4 md:p-6 text-sm md:text-lg text-gray-400 w-full max-w-[550px]">
+    <div className="flex items-center rounded-[20px] bg-[#2D3233] p-4 md:p-6 text-sm md:text-lg text-gray-400 w-full md:max-w-[69%]">
       <div className="mb-[11px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
