@@ -27,7 +27,7 @@ export const TariffsSection = () => {
 
   useEffect(() => {
     if (best) {
-      setSelectedId(best.id);
+      setSelectedId(best.uid);
     }
   }, [best]);
 
@@ -59,8 +59,8 @@ export const TariffsSection = () => {
                 tariff={best}
                 variant="large"
                 disabledDiscount={disabledDiscount}
-                selected={selectedId === best.id}
-                onSelect={() => setSelectedId(best.id)}
+                selected={selectedId === best.uid}
+                onSelect={() => setSelectedId(best.uid)}
               />
             )
           )}
@@ -73,12 +73,12 @@ export const TariffsSection = () => {
                 ))
               : others.map((t) => (
                   <TariffCard
-                    key={t.id}
+                    key={t.uid}
                     tariff={t}
                     variant="small"
                     disabledDiscount={disabledDiscount}
-                    selected={selectedId === t.id}
-                    onSelect={() => setSelectedId(t.id)}
+                    selected={selectedId === t.uid}
+                    onSelect={() => setSelectedId(t.uid)}
                   />
                 ))}
           </div>

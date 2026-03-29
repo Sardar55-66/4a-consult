@@ -1,5 +1,5 @@
 export interface Tariff {
-  id: string;
+  uid: string;
   period: string;
   price: number;
   full_price: number;

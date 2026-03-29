@@ -20,7 +20,6 @@ export const TariffCard = ({
   variant,
 }: Props) => {
   const discount = calcDiscount(tariff.price, tariff.full_price);
-  console.log('disabledDiscount', disabledDiscount)
 
   const discountTransition = "transition-all duration-500 ease-in-out";
 

@@ -10,10 +10,15 @@ export const fetchTariffs = createAsyncThunk(
   "tariffs/fetchTariffs",
   async () => {
     const data = await getTariffs();
-    return data as Tariff[];
+
+    const normalizedTariffs = data.map((tariff, index) => ({
+      ...tariff,
+      uid: `${tariff.uid}-${index}`,
+    }));
+
+    return normalizedTariffs as Tariff[];
   },
 );
-
 interface TariffsState {
   all: Tariff[];
   best?: Tariff;
